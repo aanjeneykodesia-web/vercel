@@ -20,12 +20,12 @@ setGroups(groupManufacturers(all))
 
 return(
 
-<div style={{padding:40}}>
+<div>
 
-<h1>Nearest Manufacturer Clusters</h1>
+<h1>Nearest Manufacturer Groups</h1>
 
 {groups.map((group,i)=>(
-<div key={i} style={{marginBottom:30}}>
+<div key={i}>
 
 <h2>Cluster {i+1}</h2>
 
