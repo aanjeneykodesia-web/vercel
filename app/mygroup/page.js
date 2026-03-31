@@ -26,9 +26,21 @@ return R*c
 export default function MyGroup(){
 
 const [category,setCategory]=useState("")
-const [lat,setLat]=useState("")
-const [lng,setLng]=useState("")
 const [results,setResults]=useState([])
+const [location,setLocation]=useState(null)
+
+function getLocation(){
+
+navigator.geolocation.getCurrentPosition((pos)=>{
+
+setLocation({
+lat:pos.coords.latitude,
+lng:pos.coords.longitude
+})
+
+})
+
+}
 
 function findGroup(e){
 
@@ -36,10 +48,10 @@ e.preventDefault()
 
 let manufacturers = JSON.parse(localStorage.getItem("manufacturers")) || []
 
-const user = {
+let user={
 category,
-lat:parseFloat(lat),
-lng:parseFloat(lng)
+lat:location.lat,
+lng:location.lng
 }
 
 let nearest = manufacturers
@@ -63,7 +75,19 @@ return(
 
 <h1>Find My Industrial Group</h1>
 
+<button onClick={getLocation}>
+Detect My Location
+</button>
+
+{location && (
+<p>
+Location detected: {location.lat} , {location.lng}
+</p>
+)}
+
 <form onSubmit={findGroup}>
+
+<br/>
 
 <input
 placeholder="Your Category"
@@ -73,23 +97,9 @@ required
 
 <br/><br/>
 
-<input
-placeholder="Latitude"
-onChange={(e)=>setLat(e.target.value)}
-required
-/>
-
-<br/><br/>
-
-<input
-placeholder="Longitude"
-onChange={(e)=>setLng(e.target.value)}
-required
-/>
-
-<br/><br/>
-
-<button type="submit">Find My Group</button>
+<button type="submit">
+Find Nearest Manufacturers
+</button>
 
 </form>
 
