@@ -1,6 +1,5 @@
-import manufacturers from "../../data/manufacturers"
-import {groupManufacturers} from "../../lib/group"
-
+import manufacturers from "@/data/manufacturers"
+import { groupManufacturers } from "@/lib/group"
 export default function Groups(){
 
 const groups = groupManufacturers(manufacturers)
