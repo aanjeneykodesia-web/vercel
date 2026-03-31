@@ -1,29 +1,41 @@
-import manufacturers from "../../data/manufacturers"
-import { groupManufacturers } from "../../lib/group"
+"use client"
+
+import { useEffect,useState } from "react"
+import defaultManufacturers from "../../data/manufacturers"
+import {groupManufacturers} from "../../lib/group"
+
 export default function Groups(){
 
-const groups = groupManufacturers(manufacturers)
+const [groups,setGroups]=useState([])
+
+useEffect(()=>{
+
+let stored = JSON.parse(localStorage.getItem("manufacturers")) || []
+
+let all=[...defaultManufacturers,...stored]
+
+setGroups(groupManufacturers(all))
+
+},[])
 
 return(
 
 <div style={{padding:40}}>
 
-<h1>Manufacturer Groups</h1>
+<h1>Nearest Manufacturer Clusters</h1>
 
-{Object.keys(groups).map((category)=>(
+{groups.map((group,i)=>(
+<div key={i} style={{marginBottom:30}}>
 
-<div key={category} style={{marginBottom:30}}>
+<h2>Cluster {i+1}</h2>
 
-<h2>{category}</h2>
-
-{groups[category].map((m)=>(
-
-<p key={m.id}>{m.name} - {m.city}</p>
-
+{group.map(m=>(
+<p key={m.id}>
+{m.name} - {m.category} - {m.city}
+</p>
 ))}
 
 </div>
-
 ))}
 
 </div>
