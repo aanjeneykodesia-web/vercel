@@ -1,22 +1,41 @@
 "use client"
 
-import { useEffect,useState } from "react"
+import { useEffect, useState } from "react"
+
+const ADMIN_PASSWORD = "admin//@//234"
 
 export default function Admin(){
 
+const [authorized,setAuthorized]=useState(false)
+const [password,setPassword]=useState("")
 const [data,setData]=useState([])
 
 useEffect(()=>{
 
 let stored = JSON.parse(localStorage.getItem("manufacturers")) || []
-
 setData(stored)
 
 },[])
 
+function login(e){
+
+e.preventDefault()
+
+if(password === ADMIN_PASSWORD){
+
+setAuthorized(true)
+
+}else{
+
+alert("Wrong password")
+
+}
+
+}
+
 function deleteManufacturer(id){
 
-let updated = data.filter(m=>m.id!==id)
+let updated = data.filter(m=>m.id !== id)
 
 localStorage.setItem("manufacturers",JSON.stringify(updated))
 
@@ -24,9 +43,39 @@ setData(updated)
 
 }
 
+if(!authorized){
+
 return(
 
-<div>
+<div className="container">
+
+<h1>Admin Login</h1>
+
+<form onSubmit={login}>
+
+<input
+type="password"
+placeholder="Enter Admin Password"
+value={password}
+onChange={(e)=>setPassword(e.target.value)}
+required
+/>
+
+<button type="submit">
+Login
+</button>
+
+</form>
+
+</div>
+
+)
+
+}
+
+return(
+
+<div className="container">
 
 <h1>Admin Dashboard</h1>
 
@@ -34,19 +83,18 @@ return(
 
 {data.map(m=>(
 
-<div key={m.id} style={{
-border:"1px solid #ddd",
-padding:"15px",
-marginBottom:"10px"
-}}>
+<div key={m.id} className="card">
 
 <h3>{m.name}</h3>
 
-<p>{m.category}</p>
+<p>Category: {m.category}</p>
 
-<p>{m.city}</p>
+<p>City: {m.city}</p>
 
-<button onClick={()=>deleteManufacturer(m.id)}>
+<button
+className="delete-btn"
+onClick={()=>deleteManufacturer(m.id)}
+>
 Delete
 </button>
 
