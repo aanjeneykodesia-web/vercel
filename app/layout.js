@@ -1,14 +1,29 @@
+import Navbar from "../components/Navbar"
+
 export const metadata = {
-  title: "Manufacturer Network",
-  description: "Industrial clustering platform"
+title: "Manufacturer Network"
 }
 
 export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body style={{fontFamily:"Arial",padding:20}}>
-        {children}
-      </body>
-    </html>
-  )
+
+return (
+
+<html>
+
+<body style={{fontFamily:"Arial"}}>
+
+<Navbar/>
+
+<div style={{padding:"30px"}}>
+
+{children}
+
+</div>
+
+</body>
+
+</html>
+
+)
+
 }
