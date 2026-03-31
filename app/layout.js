@@ -1,12 +1,12 @@
 export const metadata = {
   title: "Manufacturer Network",
-  description: "Manufacturer grouping platform"
+  description: "Industrial clustering platform"
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body style={{fontFamily:"Arial",margin:0,padding:0}}>
+    <html>
+      <body style={{fontFamily:"Arial",padding:20}}>
         {children}
       </body>
     </html>
