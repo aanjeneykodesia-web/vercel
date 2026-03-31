@@ -4,29 +4,69 @@ export default function Home(){
 
 return(
 
-<div>
+<div className="container">
 
-<h1>Manufacturer Network</h1>
-<li>
-<Link href="/mygroup">Find My Group</Link>
-</li>
-<p>Find nearby manufacturers from different industries.</p>
+<section className="hero">
 
-<ul>
+<h1>Industrial Manufacturer Network</h1>
 
-<li>
-<Link href="/add">Add Manufacturer</Link>
-</li>
+<p>
+Connect with nearby manufacturers from different industries 
+and build powerful supply-chain ecosystems.
+</p>
 
-<li>
-<Link href="/manufacturers">View Manufacturers</Link>
-</li>
+<div className="hero-buttons">
 
-<li>
-<Link href="/groups">Nearest Industrial Groups</Link>
-</li>
+<Link href="/add">
+<button>Register Manufacturer</button>
+</Link>
 
-</ul>
+<Link href="/mygroup">
+<button className="secondary-btn">Find My Group</button>
+</Link>
+
+</div>
+
+</section>
+
+
+<section className="features">
+
+<h2>Platform Features</h2>
+
+<div className="grid">
+
+<div className="card">
+<h3>Smart Grouping</h3>
+<p>
+Manufacturers are grouped automatically based on nearest distance and different categories.
+</p>
+</div>
+
+<div className="card">
+<h3>Location Detection</h3>
+<p>
+Automatic location detection helps find the closest industrial partners instantly.
+</p>
+</div>
+
+<div className="card">
+<h3>Industrial Ecosystem</h3>
+<p>
+Create supply-chain ecosystems by connecting metal, plastic, electronics, and more.
+</p>
+</div>
+
+<div className="card">
+<h3>Admin Dashboard</h3>
+<p>
+Admins can manage manufacturers and monitor the network.
+</p>
+</div>
+
+</div>
+
+</section>
 
 </div>
 
