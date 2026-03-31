@@ -1,25 +1,34 @@
-import manufacturers from "../../data/manufacturers"
+"use client"
+
+import { useEffect,useState } from "react"
+import defaultManufacturers from "../../data/manufacturers"
 
 export default function Manufacturers(){
 
+const [data,setData]=useState([])
+
+useEffect(()=>{
+
+let stored = JSON.parse(localStorage.getItem("manufacturers")) || []
+
+setData([...defaultManufacturers,...stored])
+
+},[])
+
 return(
 
-<div style={{padding:40}}>
+<div>
 
 <h1>Manufacturers</h1>
 
-{manufacturers.map((m)=>(
-
-<div key={m.id} style={{marginBottom:20}}>
+{data.map(m=>(
+<div key={m.id}>
 
 <h3>{m.name}</h3>
-
-<p>Category: {m.category}</p>
-
-<p>City: {m.city}</p>
+<p>{m.category}</p>
+<p>{m.city}</p>
 
 </div>
-
 ))}
 
 </div>
