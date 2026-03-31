@@ -4,24 +4,24 @@ export default function Home(){
 
 return(
 
-<div style={{padding:40}}>
+<div>
 
 <h1>Manufacturer Network</h1>
 
-<p>Industrial manufacturer grouping platform</p>
+<p>Find nearby manufacturers from different industries.</p>
 
 <ul>
 
 <li>
-<Link href="/manufacturers">
-View Manufacturers
-</Link>
+<Link href="/add">Add Manufacturer</Link>
 </li>
 
 <li>
-<Link href="/groups">
-View Groups
-</Link>
+<Link href="/manufacturers">View Manufacturers</Link>
+</li>
+
+<li>
+<Link href="/groups">Nearest Industrial Groups</Link>
 </li>
 
 </ul>
