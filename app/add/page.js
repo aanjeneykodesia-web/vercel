@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-export default function Add(){
+export default function AddManufacturer(){
 
 const [name,setName]=useState("")
 const [category,setCategory]=useState("")
@@ -10,58 +10,111 @@ const [city,setCity]=useState("")
 const [lat,setLat]=useState("")
 const [lng,setLng]=useState("")
 
-function submit(e){
+function detectLocation(){
+
+if(!navigator.geolocation){
+alert("Geolocation not supported")
+return
+}
+
+navigator.geolocation.getCurrentPosition((pos)=>{
+
+setLat(pos.coords.latitude)
+setLng(pos.coords.longitude)
+
+})
+
+}
+
+function saveManufacturer(e){
 
 e.preventDefault()
 
-const newManufacturer={
-id:Date.now(),
+let manufacturers = JSON.parse(localStorage.getItem("manufacturers")) || []
+
+let newManufacturer = {
+
+id: Date.now(),
 name,
 category,
 city,
-lat:parseFloat(lat),
-lng:parseFloat(lng)
+lat: parseFloat(lat),
+lng: parseFloat(lng)
+
 }
 
-let data = JSON.parse(localStorage.getItem("manufacturers")) || []
+manufacturers.push(newManufacturer)
 
-data.push(newManufacturer)
+localStorage.setItem("manufacturers",JSON.stringify(manufacturers))
 
-localStorage.setItem("manufacturers",JSON.stringify(data))
+alert("Manufacturer Registered")
 
-alert("Manufacturer Added!")
+setName("")
+setCategory("")
+setCity("")
 
 }
 
 return(
 
-<div>
+<div style={{padding:40}}>
 
-<h1>Add Manufacturer</h1>
+<h1>Register Manufacturer</h1>
 
-<form onSubmit={submit}>
-
-<input placeholder="Name" onChange={(e)=>setName(e.target.value)} required />
-
-<br/><br/>
-
-<input placeholder="Category" onChange={(e)=>setCategory(e.target.value)} required />
+<button onClick={detectLocation}>
+Detect My Location
+</button>
 
 <br/><br/>
 
-<input placeholder="City" onChange={(e)=>setCity(e.target.value)} required />
+<form onSubmit={saveManufacturer}>
+
+<input
+placeholder="Manufacturer Name"
+value={name}
+onChange={(e)=>setName(e.target.value)}
+required
+/>
 
 <br/><br/>
 
-<input placeholder="Latitude" onChange={(e)=>setLat(e.target.value)} required />
+<input
+placeholder="Category"
+value={category}
+onChange={(e)=>setCategory(e.target.value)}
+required
+/>
 
 <br/><br/>
 
-<input placeholder="Longitude" onChange={(e)=>setLng(e.target.value)} required />
+<input
+placeholder="City"
+value={city}
+onChange={(e)=>setCity(e.target.value)}
+required
+/>
 
 <br/><br/>
 
-<button type="submit">Submit</button>
+<input
+placeholder="Latitude"
+value={lat}
+readOnly
+/>
+
+<br/><br/>
+
+<input
+placeholder="Longitude"
+value={lng}
+readOnly
+/>
+
+<br/><br/>
+
+<button type="submit">
+Register
+</button>
 
 </form>
 
