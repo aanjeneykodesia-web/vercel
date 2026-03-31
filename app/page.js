@@ -7,7 +7,9 @@ return(
 <div>
 
 <h1>Manufacturer Network</h1>
-
+<li>
+<Link href="/mygroup">Find My Group</Link>
+</li>
 <p>Find nearby manufacturers from different industries.</p>
 
 <ul>
