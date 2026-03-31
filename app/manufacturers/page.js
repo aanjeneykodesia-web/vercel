@@ -1,4 +1,4 @@
-import manufacturers from "../../data/manufacturers"
+import manufacturers from "@/data/manufacturers"
 
 export default function Manufacturers(){
 
